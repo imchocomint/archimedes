@@ -42,17 +42,3 @@ automated_script() {
 if [[ $(tty) == "/dev/tty1" ]]; then
     automated_script
 fi
-# Configure users
-usermod -s /usr/bin/bash root
-useradd -m -G wheel -s /bin/bash liveuser
-
-# Set passwords
-echo 'root:root' | chpasswd
-echo 'liveuser:liveuser' | chpasswd
-
-# Enable services
-systemctl enable NetworkManager
-systemctl enable sddm
-
-# System configuration
-echo 'liveuser ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
